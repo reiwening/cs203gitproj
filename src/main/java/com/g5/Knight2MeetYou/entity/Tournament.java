@@ -1,5 +1,6 @@
 package com.g5.Knight2MeetYou.entity;
-
+ -X
+ 
 import java.util.*;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
