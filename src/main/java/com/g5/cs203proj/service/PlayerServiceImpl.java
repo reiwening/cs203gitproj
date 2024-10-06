@@ -1,20 +1,35 @@
-package com.g5.Knight2MeetYou.service;
+package com.g5.cs203proj.service;
+
 import org.springframework.stereotype.Service;
+
+import com.g5.cs203proj.entity.Player;
+import com.g5.cs203proj.entity.Tournament;
+import com.g5.cs203proj.entity.Match;
+import com.g5.cs203proj.controller.PlayerNotFoundException;
+import com.g5.cs203proj.entity.Player;
+import com.g5.cs203proj.repository.PlayerRepository;
+
 import java.util.*;
 
 @Service
 public class PlayerServiceImpl implements PlayerService {
 
-    private PlayerRepository players;
+    private PlayerRepository playerRepository;
 
     // constructor 
-    public PlayerServiceImpl( PlayerRepository players ) {
-        this.players = players;
+    public PlayerServiceImpl( PlayerRepository playerRepository ) {
+        this.playerRepository = playerRepository;
     }
     
 // override the methods
 
     @Override
+    public Player savePlayer( Player player ) {
+        return playerRepository.save(player);
+    }
+
+
+    @Override   
     public boolean authenticatePlayer(String username, String hashedPassword) {
         // TODO Auto-generated method stub
         return false;
@@ -40,8 +55,7 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public Player getPlayerById(Long id) {
-        // TODO Auto-generated method stub
-        return null;
+        return playerRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -49,6 +63,13 @@ public class PlayerServiceImpl implements PlayerService {
         // TODO Auto-generated method stub
         return 0;
     }
+
+    // @Override
+    // public void setPlayerGlobalEloRating(Player player, double change) {
+    //     // TODO Auto-generated method stub
+    //     double oldPlayerElo = player.getGlobalEloRating();
+    //     return player.setGlobalEloRating(oldPlayerElo + change);
+    // }
 
     @Override
     public Queue<Match> getPlayerMatchHistory(Player player) {
@@ -80,7 +101,23 @@ public class PlayerServiceImpl implements PlayerService {
         return null;
     }
 
-   
+    @Override
+    public List<Match> getMatchesAsPlayer1(Player player) {
+        return player.getMatchesAsPlayer1();
+    }
+
+    @Override
+    public List<Match> getMatchesAsPlayer2(Player player) {
+        return player.getMatchesAsPlayer2();
+    }
+
+    @Override
+    public Match addMatchToPlayerHistory(Player player, Match match) {
+        if (match.getPlayer1() == player) {
+            return player.addMatchesAsPlayer1(match);
+        }
+        return player.addMatchesAsPlayer2(match);
+    }
     
     
 }

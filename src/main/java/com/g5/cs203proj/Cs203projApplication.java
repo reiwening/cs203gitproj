@@ -1,13 +1,14 @@
-package com.g5.Knight2MeetYou;
+package com.g5.cs203proj;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+
 @SpringBootApplication
-public class Knight2MeetYouApplication {
+public class Cs203projApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Knight2MeetYouApplication.class, args);
+		SpringApplication.run(Cs203projApplication.class, args);
 	}
 
 }

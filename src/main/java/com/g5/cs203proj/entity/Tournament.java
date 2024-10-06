@@ -1,6 +1,7 @@
-package com.g5.Knight2MeetYou.entity;
+package com.g5.cs203proj.entity;
 
 import java.util.*;
+import java.time.LocalDateTime;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -22,7 +23,7 @@ public class Tournament {
     private Long id;
 
     private String name;
-
+    
     @OneToMany
     @JoinColumn(name = "tournament_id")  // Foreign key in the Match table
     private List<Match> tournamentMatchHistory;
@@ -168,12 +169,12 @@ public class Tournament {
         this.registrationCutOff = registrationCutOff;
     }
 
-    public List<Admin> getAdmins() {
-        return admins;
+    public Admin getAdmin() {
+        return admin;
     }
 
-    public void setAdmins(List<Admin> admins) {
-        this.admins = admins;
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
     }
 
 
